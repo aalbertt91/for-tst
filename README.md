@@ -51,10 +51,15 @@ This project automates the extraction of trade-level and transaction data from f
 ## Technologies Used
 
 **Python:** Core programming language used for the extraction engine and automation.
+
 **Pdfplumber:** For deep-level text extraction and coordinate-based parsing of PDF content.
+
 **Pandas:** For data structuring, deduplication, and numerical analysis.
+
 **Regex (Regular Expressions):** To identify transaction rows and filter out headers/footers.
+
 **Numpy:** For handling missing values (NaN) and maintaining data type consistency.
+
 **Openpyxl:** Engine for generating professional Excel workbooks.
 
 ## How to Run
