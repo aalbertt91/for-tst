@@ -122,7 +122,7 @@ pip install -r requirements.txt
 
 2. Configure environment variables in a .env file:
 
-BOT_TOKEN=your_telegram_bot_token
+BOT_TOKEN=your_telegram_bot_token 
 CHAT_ID=your_chat_id
 
 
