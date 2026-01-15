@@ -106,11 +106,11 @@ SQLite: Lightweight relational database for storing daily stock price snapshots.
 
 Logging: Tracks execution flow, database operations, and alert conditions.
 
-Telegram Bot API: Sends automated alerts when PnL thresholds are reached.
+Requests: Sends HTTP requests to the Telegram Bot API for automated PnL alerts.
 
 Excel (openpyxl): Generates structured portfolio performance reports.
 
-dotenv: Manages sensitive configuration values such as API tokens.
+Dotenv: Manages sensitive configuration values such as API tokens.
 
 ## How to Run
 
