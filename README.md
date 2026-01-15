@@ -87,10 +87,11 @@ python pdf_to_excel_bot.py
 
 ## Project Objective
 
-This project is a Python-based portfolio tracking and profit & loss (PnL) monitoring system designed to automate the collection of live market prices, store historical price data, calculate portfolio performance metrics, and generate automated reports and alerts.
+This project is a Python-based portfolio tracking and profit & loss (PnL) monitoring system designed to automate the collection of market prices, store historical price data, calculate portfolio performance metrics, and generate automated reports and alerts.
 
-The system retrieves real-time and historical stock prices using the yfinance API, stores daily price snapshots in a SQLite database, calculates daily and total PnL based on portfolio positions, generates Excel reports, and sends Telegram alerts when predefined PnL thresholds are exceeded.
-The project aims to simulate a lightweight portfolio monitoring tool similar to those used in professional trading and risk management environments.
+The system retrieves near real-time (intraday) and historical stock prices using the yfinance API, stores daily price snapshots in a SQLite database, calculates daily and total PnL based on portfolio positions, generates Excel reports, and sends Telegram alerts when predefined PnL thresholds are exceeded.
+
+The project aims to simulate a lightweight portfolio monitoring tool similar to those used in professional trading and risk management environments and is intended as a simplified prototype and learning-oriented system rather than a production trading platform.
 
 ## Technologies Used
 
@@ -98,7 +99,7 @@ Python: Core language for data processing, automation, and orchestration.
 
 Pandas: Used for data manipulation, portfolio calculations, and report generation.
 
-Yfinance: Retrieves live and historical stock market prices from Yahoo Finance.
+Yfinance: Retrieves intraday and historical stock market prices from Yahoo Finance.
 
 SQLAlchemy: ORM-based interaction with the SQLite database.
 
@@ -142,11 +143,11 @@ python src/portfolio_tracker.py
 
 - Provides a foundation for:
 
-- Risk monitoring
+   - Risk monitoring
 
-- Strategy performance tracking
+   - Strategy performance tracking
 
-- Alert-driven decision-making
+   - Alert-driven decision-making
 
-- Easily extensible to larger portfolios, additional asset classes, or real-time scheduling
+- Easily extensible to larger portfolios, additional asset classes, or scheduled execution
 
