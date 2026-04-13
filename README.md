@@ -1,62 +1,57 @@
-# Macro News Automation Pipeline
+# Trade Performance & Risk Analytics
 
-This repository contains a Python-based data pipeline designed to automate the extraction, transformation, and reporting of macroeconomic news from the official Federal Reserve XML feed. The system parses high-impact press releases, structures unstructured XML data, and delivers automated intelligence reports via email.
+This repository contains a professional-grade automation tool designed to transform raw trading logs into audit-ready financial risk reports. By calculating institutional metrics like the Sharpe Ratio and Maximum Drawdown, it bridges the gap between raw execution data and portfolio management insights.
 
 # 📌 Problem & Solution
-
-Monitoring central bank communications and policy shifts manually is a bottleneck for macro strategy teams. Missing a high-impact Federal Reserve announcement can lead to significant market risk, yet manual tracking of XML feeds and press releases is inefficient.
+Raw trade logs in Excel format are often difficult to interpret for risk management. Without visualizing the "Equity Curve" or calculating risk-adjusted returns, traders cannot accurately assess if a strategy is truly profitable or simply over-leveraged during volatile periods.
 
 This automation bot:
 
-Eliminates manual monitoring by automatically fetching the latest press releases from official Federal Reserve feeds.
+Eliminates manual data processing by automatically calculating PnL, fees, and cumulative returns from Excel transaction logs.
 
-Transforms raw, hierarchical XML data into clean, tabular DataFrames for structured analysis.
+Enforces data integrity through robust validation and cleanup of missing fees or inconsistent date formats.
 
-Streamlines reporting by generating formatted Excel workbooks for long-term news tracking.
+Automates quantitative risk assessment by modeling the Annualized Sharpe Ratio and volatility metrics.
 
-Enhances operational efficiency by delivering real-time reports via secure SMTP email automation to stakeholders.
+Streamlines investor relations and internal audits by generating standardized PDF reports with high-fidelity equity and drawdown visualizations.
 
 # 🛠 Tech Stack
-**Python:** Core orchestration and pipeline automation.
+**Python:** Core analytical engine and automation orchestration.
 
-**Requests:** For secure ingestion of official Federal Reserve XML feeds.
+**Pandas:** For advanced time-series aggregation and data manipulation.
 
-**ElementTree (XML):** For high-precision parsing of structured macro data.
+**NumPy:** For vectorized numerical operations and risk metric modeling.
 
-**Pandas:** For data transformation and tabular structuring.
+**Matplotlib**: To generate high-fidelity Equity Curve and Drawdown charts.
 
-**Openpyxl:** To generate professional Excel-based tracking reports.
+**ReportLab:** For programmatic generation of professional, audit-ready PDF reports.
 
-**Smtplib / EmailMessage:** For automated and secure email delivery protocols.
-
-**Dotenv:** For managing sensitive email credentials and environment variables.
+**Logging:** To track the data processing pipeline and capture execution flow.
 
 # ⚙️ Core Automation Workflow
-**Ingestion:** Connects to the Federal Reserve RSS/XML feed to retrieve the latest policy communications.
+**Ingestion & Validation:** Loads trade data from Excel and enforces strict numeric/datetime type conversions.
 
-**Parsing & Transformation:** Extracts relevant fields (Title, Date, Link) and cleans the data into a Pandas DataFrame.
+**Quantitative Analysis:** Groups trades by date to calculate daily returns, cumulative PnL, and volatility.
 
-**Report Generation:** Converts the processed macro data into a formatted Excel report.
+**Risk Modeling:** Computes the Annualized Sharpe Ratio and identifies the Maximum Drawdown (underwater periods).
 
-**Automated Delivery:** Attaches the report and dispatches it to a predefined list of receivers via automated email.
+**Visual Reporting:** Generates performance charts and compiles all metrics into a final, portable PDF report.
 
 # 📊 Example Output
-Upon execution, the bot displays the processed macro items and confirms the delivery status:
+Upon execution, the bot provides real-time logs and generates professional documents in the reports/ directory:
 
-```                                              title                         pubDate
-0  Federal Reserve Board announces approval of ap...   Fri, 10 Apr 2026 20:15:00 GMT
-1  Federal Reserve Board announces termination of...    Thu, 9 Apr 2026 15:00:00 GMT
-2  Minutes of the Federal Open Market Committee, ...    Wed, 8 Apr 2026 18:00:00 GMT
-3  Federal Reserve Board invites public comment o...    Wed, 8 Apr 2026 15:30:00 GMT
-4  Federal Reserve Board issues enforcement actio...    Fri, 3 Apr 2026 15:00:00 GMT
-
-[10 rows x 6 columns]
-📧 Email sent successfully!
+```
+INFO - Excel file loaded successfully
+INFO - Data types converted successfully.
+INFO - Rows before cleanup: 36, after cleanup: 36
+INFO - Sharpe Ratio calculated: 4.45
+INFO - Equity curve graph generated and saved.
+INFO - Drawdown graph generated and saved.
+INFO - PDF report successfully saved at: reports/risk_report.pdf
 ```
 
-
 # 🚀 How to Run
-1. Configure your .env file with SENDER_EMAIL, EMAIL_PASSWORD, and RECEIVER_EMAIL.
+1. Place your trading log in data/trades.xlsx.
 
 2. Install dependencies:
 
@@ -64,9 +59,8 @@ Upon execution, the bot displays the processed macro items and confirms the deli
 pip install -r requirements.txt
 ```
 
-
 3. Run the automation:
 
 ```
-python src/news_report_bot.py
+python src/trade_risk_analyzer.py
 ```
