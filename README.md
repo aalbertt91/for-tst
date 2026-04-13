@@ -42,6 +42,7 @@ When the script is executed, it provides structured feedback on the ETL process:
 INFO:root:Rows before cleanup: 2, after cleanup: 2
 INFO:root:Data successfully written to the database.
 INFO:root:2 rows successfully written to the database.
+```
 
 # 🚀 How to Run
 1. Place your trade file in data/trades.xlsx.
