@@ -1,60 +1,62 @@
-# Excel-to-SQL Trade ETL Automation
-
-This repository contains a Python-based automation tool designed to streamline the ETL (Extract, Transform, Load) process for financial trade logs. It converts raw, unstructured Excel data into a structured SQLite database using a robust ORM mapping.
+# Financial Market Data Extractor (yFinance Bot)
+This repository contains a Python-based automation tool designed to fetch real-time financial market data using the Yahoo Finance API. It automates the extraction of historical prices, tickers, and key financial metrics for further analysis or reporting.
 
 # 📌 Problem & Solution
-Manual entry of trade data from Excel to databases is time-consuming and prone to human error, which can lead to inaccurate P&L reporting and financial risk.
+Manually tracking market data for multiple tickers is inefficient and limits the ability to perform high-frequency or large-scale analysis. Relying on manual downloads leads to outdated information and slowed decision-making.
 
 This automation bot:
 
-Eliminates manual data manipulation by automating the reshaping of Excel spreadsheets.
+Eliminates manual data fetching by automating the API connection to Yahoo Finance.
 
-Enforces data integrity through automated type conversion (trade_id, quantity, price, trade_date).
+Streamlines ticker monitoring by processing multiple financial instruments simultaneously.
 
-Cleans the dataset by identifying and removing incomplete or null records.
+Formats raw market data into clean, analysis-ready structures (DataFrames/CSV).
 
-Provides real-time execution feedback via structured logging.
+Provides reliable execution tracking through integrated logging.
 
 # 🛠 Tech Stack
-**Python:** Core logic and automation.
+**Python:** Core programming for API orchestration and automation.
 
-**Pandas:** Data manipulation and cleaning.
+**yFinance:** Primary library for financial data extraction.
 
-**SQLAlchemy (ORM):** Database schema management and secure data insertion.
+**Pandas:** Data structuring and export management.
 
-**SQLite:** Lightweight relational database storage.
-
-**Logging:** Monitoring execution flow and identifying data gaps.
+**Logging:** To monitor API requests and handle connection status.
 
 # ⚙️ Core Automation Workflow
-Ingestion: Reads raw trades.xlsx from the /data directory.
+**Request:** Initializes an automated connection to the yFinance API for a specified list of tickers.
 
-Transformation: Transposes and reshapes the DataFrame to match the database schema.
+**Extraction:** Fetches historical price data, volume, and company metadata.
 
-Validation: Checks for null values and enforces numeric/datetime formats.
+**Data Processing:** Cleans and structures the raw API response using Pandas.
 
-Loading: Maps data to a Stock ORM model and commits it to a SQL database.
+**Storage/Export:** Saves the structured financial data as CSV or prepares it for downstream analytics.
 
 # 📊 Example Output
-When the script is executed, it provides structured feedback on the ETL process:
+When the script is executed, it provides a summary of the extracted market data and database status:
 
-```bash
-INFO:root:Rows before cleanup: 2, after cleanup: 2
-INFO:root:Data successfully written to the database.
-INFO:root:2 rows successfully written to the database.
-```
+Bash
+INFO:root:Stock data successfully written to the database.
+INFO:root:Total rows inserted: 33
+INFO:root:Amazon Summary: {'Last Close': 232.52, 'Daily Change': 0.45, 'Mean Close': 228.23, ...}
+INFO:root:Apple Summary: {'Last Close': 272.82, 'Daily Change': -0.67, 'Mean Close': 272.81, ...}
+INFO:root:Tesla Summary: {'Last Close': 454.42, 'Daily Change': -5.21, 'Mean Close': 476.90, ...}
 
 # 🚀 How to Run
-1. Place your trade file in data/trades.xlsx.
+1. Ensure you have the ticker list ready in the configuration.
 
 2. Install dependencies:
 
-```bash
+```
+Bash
 pip install -r requirements.txt
 ```
 
 3. Run the automation:
 
-```bash
-python src/exceltosqlbot.py
 ```
+Bash
+python "yfinance bot/src/stock-market-data-bot.py"
+```
+
+
