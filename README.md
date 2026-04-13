@@ -38,19 +38,20 @@ Loading: Maps data to a Stock ORM model and commits it to a SQL database.
 # 📊 Example Output
 When the script is executed, it provides structured feedback on the ETL process:
 
-Bash
+```bash
 INFO:root:Rows before cleanup: 2, after cleanup: 2
 INFO:root:Data successfully written to the database.
 INFO:root:2 rows successfully written to the database.
 
 # 🚀 How to Run
-Place your trade file in data/trades.xlsx.
+1. Place your trade file in data/trades.xlsx.
 
-Install dependencies:
+2. Install dependencies:
 
 Bash
 pip install -r requirements.txt
-Run the automation:
+
+3. Run the automation:
 
 Bash
 python src/exceltosqlbot.py
