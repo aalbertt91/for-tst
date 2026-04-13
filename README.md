@@ -59,6 +59,7 @@ INFO:root:PnL threshold not reached.
 1.Configure your .env file with BOT_TOKEN and CHAT_ID.
 
 
+
 2.Install dependencies:
 
 ```
