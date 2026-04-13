@@ -16,15 +16,15 @@ Cleans the dataset by identifying and removing incomplete or null records.
 Provides real-time execution feedback via structured logging.
 
 # 🛠 Tech Stack
-Python: Core logic and automation.
+**Python:** Core logic and automation.
 
-Pandas: Data manipulation and cleaning.
+**Pandas:** Data manipulation and cleaning.
 
-SQLAlchemy (ORM): Database schema management and secure data insertion.
+**SQLAlchemy (ORM):** Database schema management and secure data insertion.
 
-SQLite: Lightweight relational database storage.
+**SQLite:** Lightweight relational database storage.
 
-Logging: Monitoring execution flow and identifying data gaps.
+**Logging:** Monitoring execution flow and identifying data gaps.
 
 # ⚙️ Core Automation Workflow
 Ingestion: Reads raw trades.xlsx from the /data directory.
