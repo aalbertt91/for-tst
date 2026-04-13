@@ -35,12 +35,14 @@ Provides reliable execution tracking through integrated logging.
 # 📊 Example Output
 When the script is executed, it provides a summary of the extracted market data and database status:
 
+```
 Bash
 INFO:root:Stock data successfully written to the database.
 INFO:root:Total rows inserted: 33
 INFO:root:Amazon Summary: {'Last Close': 232.52, 'Daily Change': 0.45, 'Mean Close': 228.23, ...}
 INFO:root:Apple Summary: {'Last Close': 272.82, 'Daily Change': -0.67, 'Mean Close': 272.81, ...}
 INFO:root:Tesla Summary: {'Last Close': 454.42, 'Daily Change': -5.21, 'Mean Close': 476.90, ...}
+```
 
 # 🚀 How to Run
 1. Ensure you have the ticker list ready in the configuration.
