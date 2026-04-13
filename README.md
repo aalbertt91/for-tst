@@ -1,63 +1,73 @@
-# Telegram Stock Price Alert Bot
+# Portfolio Tracker & PnL Monitoring Bot
 
-This repository contains a Python-based automation tool designed to monitor live stock prices and send real-time alerts via Telegram. It tracks price volatility and triggers instant notifications when specific market thresholds are met, ensuring timely decision-making.
+This repository contains a comprehensive Python-based automation system designed to track financial portfolios in real-time. It automates market data collection, calculates daily and total PnL metrics, manages a historical price database, and triggers automated alerts based on portfolio performance.
 
 # 📌 Problem & Solution
-Monitoring stock price movements manually throughout the trading day is inefficient and increases the risk of missing critical entry or exit points. Professional traders need an automated system that provides instant alerts without constant screen monitoring.
+Manually tracking multiple stock positions and calculating real-time P&L across different entry points is labor-intensive and prone to calculation errors. Investors need a centralized system that bridges the gap between live market data, historical records, and instant risk notifications.
 
 This automation bot:
 
-Eliminates the need for manual price tracking by fetching live market data via the Yahoo Finance API.
+Eliminates manual price updates by fetching live market data via the Yahoo Finance API.
 
-Calculates real-time percentage changes relative to the previous day's closing price.
+Enforces data persistence by storing daily price snapshots in a structured SQLite database using SQLAlchemy ORM.
 
-Automates instant notifications through the Telegram Bot API to ensure immediate awareness of price surges.
+Automates complex P&L calculations by merging live market prices with static portfolio positions (CSV).
 
-Implements structured logging and environment variable security to maintain a reliable and professional-grade monitoring tool.
+Streamlines reporting and risk management through automated Excel generation and real-time Telegram alerts for PnL thresholds.
 
 # 🛠 Tech Stack
-**Python:** Core programming for automation and API orchestration.
+**Python:** Core engine for data orchestration and automation.
 
-**yFinance:** For fetching historical and live financial market data.
+**Pandas:** For high-performance data manipulation and PnL calculations.
 
-**Requests:** To handle communication with the Telegram Bot API.
+**yFinance:** To retrieve intraday and historical market data.
 
-**Python-dotenv:** For secure management of sensitive credentials (API tokens).
+**SQLAlchemy (ORM):** For database schema management and secure data persistence.
 
-**Logging:** To monitor execution flow, price checks, and alert status.
+**SQLite:** Lightweight relational storage for historical price snapshots.
 
-## ⚙️ Core Automation Workflow
-**Initialization:** Loads secure credentials and fetches the previous day’s closing price for the target ticker.
+**Requests:** To facilitate real-time communication with the Telegram Bot API.
 
-**Monitoring:** Runs a continuous loop to download live price data at 5-minute intervals.
+**Excel (openpyxl):** For generating structured portfolio performance reports.
 
-**Calculation:** Compares the live price against the benchmark to determine the percentage volatility.
+# ⚙️ Core Automation Workflow
+**Data Ingestion:** Fetches current and previous close prices for the target ticker list.
 
-**Notification:** Triggers a Telegram alert if the price change exceeds the defined threshold (e.g., 1%) and logs the event.
+**Persistence:** Checks for existing records and commits new price snapshots to the SQLite database.
+
+**Analytics:** Merges database records with portfolio CSV data to calculate Daily and Total PnL.
+
+**Reporting & Alerts:** Generates a professional Excel report and triggers a Telegram notification if PnL thresholds are exceeded.
 
 # 📊 Example Output
-When the script is executed, it provides a real-time log of the monitoring process in the terminal:
+Upon execution, the bot provides a structured summary of the portfolio status and execution flow:
 
 ```
-INFO:root:Price alert bot started for AMD
-INFO:root:Successfully fetched previous close price for AMD: 236.64
-INFO:root:Live price fetched for AMD: 245.02
-INFO:root:Price change calculated for AMD: 3.5412%
-INFO:root:Price threshold reached for AMD: change=3.54%
-INFO:root:Telegram alert sent successfully for AMD
-INFO:root:Waiting 300 seconds before next price check
+INFO:root:5 new stock records inserted.
+INFO:root:Total Daily PnL: 105.35
+INFO:root:Total PnL: 479.14
+INFO:root:Excel report generated successfully.
+INFO:root:PnL threshold not reached.
+
+   Stock   Price   Close  Quantity  Entry Price  Daily PnL  Total PnL
+0   AAPL  260.48  260.49         5       234.00      -0.05     132.40
+1   TSLA  348.95  345.62        10       403.00      33.30    -540.50
+2   AMZN  238.38  233.65         8       218.00      37.84     163.04
 ```
 
 # 🚀 How to Run
-1.Place your .env file in the project root folder with your BOT_TOKEN and CHAT_ID.
+1.Configure your .env file with BOT_TOKEN and CHAT_ID.
+
 
 2.Install dependencies:
 
 ```
 pip install -r requirements.txt
 ```
+
 3.Run the automation:
 
+
 ```
-python src/telegram_price_alert_bot.py
+python src/portfolio_tracker.py
 ```
