@@ -1,76 +1,69 @@
-# PDF-to-Excel Financial Statement Parser
+# Telegram Stock Price Alert Bot
 
-This repository contains a high-precision automation tool designed to extract trade-level transaction data from complex, unstructured financial PDF reports (e.g., broker statements) and convert them into structured Excel datasets.
+This repository contains a Python-based automation tool designed to monitor live stock prices and send real-time alerts via Telegram. It tracks price volatility and triggers instant notifications when specific market thresholds are met, ensuring timely decision-making.
 
 # 📌 Problem & Solution
-
-Financial institutions often provide trade history in PDF formats that use borderless tables and inconsistent layouts. Standard OCR tools frequently fail to capture these accurately, leading to "column shifting" errors and requiring hours of manual data entry.
+Monitoring stock price movements manually throughout the trading day is inefficient and increases the risk of missing critical entry or exit points. Professional traders need an automated system that provides instant alerts without constant screen monitoring.
 
 This automation bot:
 
-Replaces manual data entry by using coordinate-based parsing via pdfplumber.
+Eliminates the need for manual price tracking by fetching live market data via the Yahoo Finance API.
 
-Implements a floating-point tolerance check to identify and fix misaligned columns (e.g., identifying when commission is mistaken for price).
+Calculates real-time percentage changes relative to the previous day's closing price.
 
-Automatically normalizes transaction sides (BUY/SELL) and deduplicates records.
+Automates instant notifications through the Telegram Bot API to ensure immediate awareness of price surges.
 
-Provides a built-in "Validation Report" to track missing symbols or extraction failures in real-time.
+Implements structured logging and environment variable security to maintain a reliable and professional-grade monitoring tool.
 
 # 🛠 Tech Stack
-**Python:** Core engine for data orchestration.
+**Python:** Core programming for automation and API orchestration.
 
-**Pdfplumber:** Advanced text extraction and coordinate-based parsing.
+**yFinance:** For fetching historical and live financial market data.
 
-**Pandas & Numpy:** For data cleaning, deduplication, and handling missing values (NaN).
+**Requests:** To handle communication with the Telegram Bot API.
 
-**Regex (Regular Expressions):** To identify specific transaction patterns and filter out headers/footers.
+**Python-dotenv:** For secure management of sensitive credentials (API tokens).
 
-**Openpyxl:** For generating professional Excel workbooks.
+**Logging:** To monitor execution flow, price checks, and alert status.
 
-# ⚙️ Core Automation Workflow
-**Ingestion:** Opens and reads multi-page financial PDF statements.
+## ⚙️ Core Automation Workflow
+**Initialization:** Loads secure credentials and fetches the previous day’s closing price for the target ticker.
 
-**Regex Filtering:** Scans lines to isolate transaction rows based on date patterns (MM/DD).
+**Monitoring:** Runs a continuous loop to download live price data at 5-minute intervals.
 
-**Transformation:** Logic-based parsing of quantity, symbol, side (BUY/SELL), and transaction costs.
+**Calculation:** Compares the live price against the benchmark to determine the percentage volatility.
 
-**Validation & Loading:** Performs a final data integrity check and exports the cleaned dataset to a structured Excel file.
+**Notification:** Triggers a Telegram alert if the price change exceeds the defined threshold (e.g., 1%) and logs the event.
 
 # 📊 Example Output
-Upon execution, the bot generates a Data Validation Report to ensure auditability:
+When the script is executed, it provides a real-time log of the monitoring process in the terminal:
 
 ```
-========================================
-📊 STAGE 5: DATA VALIDATION REPORT
-----------------------------------------
-✅ Total Transactions Processed : 11
-♻️  Duplicate Rows Removed       : 1
-⚠️  Missing Symbols (NaN)       : 1
-❌ Failed Price Extractions     : 0
-========================================
-
-    date  side symbol  quantity  price  total_amount  commission
-0   7/11   BUY    JNK       100  37.18      -3725.85       -7.95
-1   7/11   BUY   SBRA       200  11.04      -2215.95       -7.95
-2   7/11  SELL    JNK       200  36.88       7368.45       -7.95
-3   7/11  SELL    JNK       500  36.88      18432.55       -7.95
-4   7/11   BUY   SBRA        50  11.03       -559.65       -7.95
-5   7/11   BUY   SBRA        50  11.03       -559.45       -7.95
-6   7/11   BUY   SBRA       150  11.05      -1665.45       -7.95
-7   7/12   BUY    JNK        50  37.30      -1872.90       -7.95
-8   7/18   BUY    JNK        50  38.28      -1921.90       -7.95
-9   7/23   BUY    NaN      5000 109.00      -5450.00         NaN
-10  7/30   BUY  FMPXX      1000   1.00      -1007.95       -7.95
+INFO:root:Price alert bot started for AMD
+Previous close price: 236.63999938964844
+INFO:root:Successfully fetched previous close price for AMD: 236.63999938964844
+/home/runner/workspace/telegram_price_alert_bot/src/price_alert_bot.py:37: FutureWarning: YF.download() has changed argument auto_adjust default to True
+  data = yf.download("AMD", period="1d", interval="1m")
+[*********************100%***********************]  1 of 1 completed
+Live price: 245.02000427246094
+INFO:root:Live price fetched for AMD: 245.02000427246094
+Percentage change: 3.541246%
+INFO:root:Price change calculated for AMD: 3.5412%
+INFO:root:Price threshold reached for AMD: change=3.54%
+INFO:root:Telegram alert sent successfully for AMD
+INFO:root:Waiting 300 seconds before next price check
 ```
 
 # 🚀 How to Run
-1. Place your PDF file in the data/ directory.
+1.Place your .env file in the project root folder with your BOT_TOKEN and CHAT_ID.
 
-2. Install dependencies:
+2.Install dependencies:
+
 ```
 pip install -r requirements.txt
 ```
-3. Run the automation:
+3.Run the automation:
+
 ```
-python pdf_to_excel_bot/src/pdf_to_excel_bot.py
+python src/telegram_price_alert_bot.py
 ```
