@@ -1,74 +1,72 @@
-# Portfolio Tracker & PnL Monitoring Bot
+# Macro News Automation Pipeline
 
-This repository contains a comprehensive Python-based automation system designed to track financial portfolios in real-time. It automates market data collection, calculates daily and total PnL metrics, manages a historical price database, and triggers automated alerts based on portfolio performance.
+This repository contains a Python-based data pipeline designed to automate the extraction, transformation, and reporting of macroeconomic news from the official Federal Reserve XML feed. The system parses high-impact press releases, structures unstructured XML data, and delivers automated intelligence reports via email.
 
 # 📌 Problem & Solution
-Manually tracking multiple stock positions and calculating real-time P&L across different entry points is labor-intensive and prone to calculation errors. Investors need a centralized system that bridges the gap between live market data, historical records, and instant risk notifications.
+
+Monitoring central bank communications and policy shifts manually is a bottleneck for macro strategy teams. Missing a high-impact Federal Reserve announcement can lead to significant market risk, yet manual tracking of XML feeds and press releases is inefficient.
 
 This automation bot:
 
-Eliminates manual price updates by fetching live market data via the Yahoo Finance API.
+Eliminates manual monitoring by automatically fetching the latest press releases from official Federal Reserve feeds.
 
-Enforces data persistence by storing daily price snapshots in a structured SQLite database using SQLAlchemy ORM.
+Transforms raw, hierarchical XML data into clean, tabular DataFrames for structured analysis.
 
-Automates complex P&L calculations by merging live market prices with static portfolio positions (CSV).
+Streamlines reporting by generating formatted Excel workbooks for long-term news tracking.
 
-Streamlines reporting and risk management through automated Excel generation and real-time Telegram alerts for PnL thresholds.
+Enhances operational efficiency by delivering real-time reports via secure SMTP email automation to stakeholders.
 
 # 🛠 Tech Stack
-**Python:** Core engine for data orchestration and automation.
+**Python:** Core orchestration and pipeline automation.
 
-**Pandas:** For high-performance data manipulation and PnL calculations.
+**Requests:** For secure ingestion of official Federal Reserve XML feeds.
 
-**yFinance:** To retrieve intraday and historical market data.
+**ElementTree (XML):** For high-precision parsing of structured macro data.
 
-**SQLAlchemy (ORM):** For database schema management and secure data persistence.
+**Pandas:** For data transformation and tabular structuring.
 
-**SQLite:** Lightweight relational storage for historical price snapshots.
+**Openpyxl:** To generate professional Excel-based tracking reports.
 
-**Requests:** To facilitate real-time communication with the Telegram Bot API.
+**Smtplib / EmailMessage:** For automated and secure email delivery protocols.
 
-**Excel (openpyxl):** For generating structured portfolio performance reports.
+**Dotenv:** For managing sensitive email credentials and environment variables.
 
 # ⚙️ Core Automation Workflow
-**Data Ingestion:** Fetches current and previous close prices for the target ticker list.
+**Ingestion:** Connects to the Federal Reserve RSS/XML feed to retrieve the latest policy communications.
 
-**Persistence:** Checks for existing records and commits new price snapshots to the SQLite database.
+**Parsing & Transformation:** Extracts relevant fields (Title, Date, Link) and cleans the data into a Pandas DataFrame.
 
-**Analytics:** Merges database records with portfolio CSV data to calculate Daily and Total PnL.
+**Report Generation:** Converts the processed macro data into a formatted Excel report.
 
-**Reporting & Alerts:** Generates a professional Excel report and triggers a Telegram notification if PnL thresholds are exceeded.
+**Automated Delivery:** Attaches the report and dispatches it to a predefined list of receivers via automated email.
 
 # 📊 Example Output
-Upon execution, the bot provides a structured summary of the portfolio status and execution flow:
+Upon execution, the bot displays the processed macro items and confirms the delivery status:
 
-```
-INFO:root:5 new stock records inserted.
-INFO:root:Total Daily PnL: 105.35
-INFO:root:Total PnL: 479.14
-INFO:root:Excel report generated successfully.
-INFO:root:PnL threshold not reached.
+```                                              title                         pubDate
+0  Federal Reserve Board announces approval of ap...   Fri, 10 Apr 2026 20:15:00 GMT
+1  Federal Reserve Board announces termination of...    Thu, 9 Apr 2026 15:00:00 GMT
+2  Minutes of the Federal Open Market Committee, ...    Wed, 8 Apr 2026 18:00:00 GMT
+3  Federal Reserve Board invites public comment o...    Wed, 8 Apr 2026 15:30:00 GMT
+4  Federal Reserve Board issues enforcement actio...    Fri, 3 Apr 2026 15:00:00 GMT
 
-   Stock   Price   Close  Quantity  Entry Price  Daily PnL  Total PnL
-0   AAPL  260.48  260.49         5       234.00      -0.05     132.40
-1   TSLA  348.95  345.62        10       403.00      33.30    -540.50
-2   AMZN  238.38  233.65         8       218.00      37.84     163.04
+[10 rows x 6 columns]
+📧 Email sent successfully!
 ```
+
 
 # 🚀 How to Run
-1.Configure your .env file with BOT_TOKEN and CHAT_ID.
+1. Configure your .env file with SENDER_EMAIL, EMAIL_PASSWORD, and RECEIVER_EMAIL.
 
-
-
-2.Install dependencies:
+2. Install dependencies:
 
 ```
 pip install -r requirements.txt
 ```
 
-3.Run the automation:
 
+3. Run the automation:
 
 ```
-python src/portfolio_tracker.py
+python src/news_report_bot.py
 ```
