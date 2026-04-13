@@ -49,10 +49,10 @@ INFO:root:2 rows successfully written to the database.
 
 2. Install dependencies:
 
-Bash
+```Bash
 pip install -r requirements.txt
 
 3. Run the automation:
 
-Bash
+```Bash
 python src/exceltosqlbot.py
