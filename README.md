@@ -36,7 +36,6 @@ Provides reliable execution tracking through integrated logging.
 When the script is executed, it provides a summary of the extracted market data and database status:
 
 ```
-
 INFO:root:Stock data successfully written to the database.
 INFO:root:Total rows inserted: 33
 INFO:root:Amazon Summary: {'Last Close': 232.52, 'Daily Change': 0.45, 'Mean Close': 228.23, ...}
@@ -50,14 +49,12 @@ INFO:root:Tesla Summary: {'Last Close': 454.42, 'Daily Change': -5.21, 'Mean Clo
 2. Install dependencies:
 
 ```
-
 pip install -r requirements.txt
 ```
 
 3. Run the automation:
 
 ```
-
 python "yfinance bot/src/stock-market-data-bot.py"
 ```
 
