@@ -64,12 +64,13 @@ Upon execution, the bot generates a Data Validation Report to ensure auditabilit
 ```
 
 # 🚀 How to Run
-1.Place your PDF file in the data/ directory.
+1 .Place your PDF file in the data/ directory.
 
-2.Install dependencies:
+2. Install dependencies:
 ```
 pip install -r requirements.txt
 ```
+
 3. Run the automation:
 ```
 python pdf_to_excel_bot/src/pdf_to_excel_bot.py
