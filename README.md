@@ -71,8 +71,8 @@ Upon execution, the bot generates a Data Validation Report to ensure auditabilit
 ```
 pip install -r requirements.txt
 ```
-3. Run the automation:
 
+3. Run the automation:
 ```
 python pdf_to_excel_bot/src/pdf_to_excel_bot.py
 ```
