@@ -1,61 +1,78 @@
-# Financial Market Data Extractor (yFinance Bot)
-This repository contains a Python-based automation tool designed to fetch real-time financial market data using the Yahoo Finance API. It automates the extraction of historical prices, tickers, and key financial metrics for further analysis or reporting.
+# PDF-to-Excel Financial Statement Parser
+
+This repository contains a high-precision automation tool designed to extract trade-level transaction data from complex, unstructured financial PDF reports (e.g., broker statements) and convert them into structured Excel datasets.
 
 # 📌 Problem & Solution
-Manually tracking market data for multiple tickers is inefficient and limits the ability to perform high-frequency or large-scale analysis. Relying on manual downloads leads to outdated information and slowed decision-making.
+
+Financial institutions often provide trade history in PDF formats that use borderless tables and inconsistent layouts. Standard OCR tools frequently fail to capture these accurately, leading to "column shifting" errors and requiring hours of manual data entry.
 
 This automation bot:
 
-Eliminates manual data fetching by automating the API connection to Yahoo Finance.
+Replaces manual data entry by using coordinate-based parsing via pdfplumber.
 
-Streamlines ticker monitoring by processing multiple financial instruments simultaneously.
+Implements a floating-point tolerance check to identify and fix misaligned columns (e.g., identifying when commission is mistaken for price).
 
-Formats raw market data into clean, analysis-ready structures (DataFrames/CSV).
+Automatically normalizes transaction sides (BUY/SELL) and deduplicates records.
 
-Provides reliable execution tracking through integrated logging.
+Provides a built-in "Validation Report" to track missing symbols or extraction failures in real-time.
 
 # 🛠 Tech Stack
-**Python:** Core programming for API orchestration and automation.
+**Python:** Core engine for data orchestration.
 
-**yFinance:** Primary library for financial data extraction.
+**Pdfplumber:** Advanced text extraction and coordinate-based parsing.
 
-**Pandas:** Data structuring and export management.
+**Pandas & Numpy:** For data cleaning, deduplication, and handling missing values (NaN).
 
-**Logging:** To monitor API requests and handle connection status.
+**Regex (Regular Expressions):** To identify specific transaction patterns and filter out headers/footers.
+
+**Openpyxl:** For generating professional Excel workbooks.
 
 # ⚙️ Core Automation Workflow
-**Request:** Initializes an automated connection to the yFinance API for a specified list of tickers.
+**Ingestion:** Opens and reads multi-page financial PDF statements.
 
-**Extraction:** Fetches historical price data, volume, and company metadata.
+**Regex Filtering:** Scans lines to isolate transaction rows based on date patterns (MM/DD).
 
-**Data Processing:** Cleans and structures the raw API response using Pandas.
+**Transformation:** Logic-based parsing of quantity, symbol, side (BUY/SELL), and transaction costs.
 
-**Storage/Export:** Saves the structured financial data as CSV or prepares it for downstream analytics.
+**Validation & Loading:** Performs a final data integrity check and exports the cleaned dataset to a structured Excel file.
 
 # 📊 Example Output
-When the script is executed, it provides a summary of the extracted market data and database status:
+Upon execution, the bot generates a Data Validation Report to ensure auditability:
 
 ```
-INFO:root:Stock data successfully written to the database.
-INFO:root:Total rows inserted: 33
-INFO:root:Amazon Summary: {'Last Close': 232.52, 'Daily Change': 0.45, 'Mean Close': 228.23, ...}
-INFO:root:Apple Summary: {'Last Close': 272.82, 'Daily Change': -0.67, 'Mean Close': 272.81, ...}
-INFO:root:Tesla Summary: {'Last Close': 454.42, 'Daily Change': -5.21, 'Mean Close': 476.90, ...}
+========================================
+📊 STAGE 5: DATA VALIDATION REPORT
+----------------------------------------
+✅ Total Transactions Processed : 11
+♻️  Duplicate Rows Removed       : 1
+⚠️  Missing Symbols (NaN)       : 1
+❌ Failed Price Extractions     : 0
+========================================
+
+    date  side symbol  quantity  price  total_amount  commission
+0   7/11   BUY    JNK       100  37.18      -3725.85       -7.95
+1   7/11   BUY   SBRA       200  11.04      -2215.95       -7.95
+2   7/11  SELL    JNK       200  36.88       7368.45       -7.95
+3   7/11  SELL    JNK       500  36.88      18432.55       -7.95
+4   7/11   BUY   SBRA        50  11.03       -559.65       -7.95
+5   7/11   BUY   SBRA        50  11.03       -559.45       -7.95
+6   7/11   BUY   SBRA       150  11.05      -1665.45       -7.95
+7   7/12   BUY    JNK        50  37.30      -1872.90       -7.95
+8   7/18   BUY    JNK        50  38.28      -1921.90       -7.95
+9   7/23   BUY    NaN      5000 109.00      -5450.00         NaN
+10  7/30   BUY  FMPXX      1000   1.00      -1007.95       -7.95
 ```
 
 # 🚀 How to Run
-1. Ensure you have the ticker list ready in the configuration.
+1.Place your PDF file in the data/ directory.
 
-2. Install dependencies:
+2.Install dependencies:
 
 ```
 pip install -r requirements.txt
 ```
-
 3. Run the automation:
 
 ```
-python "yfinance bot/src/stock-market-data-bot.py"
+python pdf_to_excel_bot/src/pdf_to_excel_bot.py
 ```
-
-
