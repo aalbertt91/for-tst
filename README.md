@@ -67,7 +67,6 @@ Upon execution, the bot generates a Data Validation Report to ensure auditabilit
 1.Place your PDF file in the data/ directory.
 
 2.Install dependencies:
-
 ```
 pip install -r requirements.txt
 ```
