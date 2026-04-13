@@ -40,14 +40,8 @@ When the script is executed, it provides a real-time log of the monitoring proce
 
 ```
 INFO:root:Price alert bot started for AMD
-Previous close price: 236.63999938964844
-INFO:root:Successfully fetched previous close price for AMD: 236.63999938964844
-/home/runner/workspace/telegram_price_alert_bot/src/price_alert_bot.py:37: FutureWarning: YF.download() has changed argument auto_adjust default to True
-  data = yf.download("AMD", period="1d", interval="1m")
-[*********************100%***********************]  1 of 1 completed
-Live price: 245.02000427246094
-INFO:root:Live price fetched for AMD: 245.02000427246094
-Percentage change: 3.541246%
+INFO:root:Successfully fetched previous close price for AMD: 236.64
+INFO:root:Live price fetched for AMD: 245.02
 INFO:root:Price change calculated for AMD: 3.5412%
 INFO:root:Price threshold reached for AMD: change=3.54%
 INFO:root:Telegram alert sent successfully for AMD
